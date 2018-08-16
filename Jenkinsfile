@@ -28,8 +28,18 @@ parallel_nodes(['linux && cura', 'windows && cura']) {
 
                 // Try and run the unit tests. If this stage fails, we consider the build to be "unstable".
                 stage('Unit Test') {
+                    def branch = env.BRANCH_NAME
+                    if(!fileExists("${env.CURA_ENVIRONMENT_PATH}/${branch}")) {
+                        branch = "master"
+                    }
+                    def uranium_dir = get_workspace_dir("Ultimaker/Uranium/${branch}")
+
                     try {
-                        make('test')
+                        sh """
+                            cd ..
+                            export PYTHONPATH=.:"${uranium_dir}"
+                            ${env.CURA_ENVIRONMENT_PATH}/${branch}/bin/pytest -x --verbose --full-trace --capture=no ./tests
+                        """
                     } catch(e) {
                         currentBuild.result = "UNSTABLE"
                     }
