@@ -437,72 +437,15 @@ UM.MainWindow
                 source: UM.Controller.activeStage.mainComponent
             }
 
-            Loader
+            Button
             {
-                id: sidebar
-
-                property bool collapsed: false;
-                property var initialWidth: UM.Theme.getSize("sidebar").width;
-
-                function callExpandOrCollapse() {
-                    if (collapsed) {
-                        sidebar.visible = true;
-                        sidebar.initialWidth = UM.Theme.getSize("sidebar").width;
-                        viewportRect = Qt.rect(0, 0, (base.width - sidebar.width) / base.width, 1.0);
-                        expandSidebarAnimation.start();
-                    } else {
-                        viewportRect = Qt.rect(0, 0, 1, 1.0);
-                        collapseSidebarAnimation.start();
-                    }
-                    collapsed = !collapsed;
-                    UM.Preferences.setValue("cura/sidebar_collapsed", collapsed);
-                }
-
+                text: "Pop out sidebar"
                 anchors
                 {
-                    top: topbar.top
                     bottom: parent.bottom
+                    right: parent.right
                 }
-
-                width: initialWidth
-                x: base.width - sidebar.width
-                source: UM.Controller.activeStage.sidebarComponent
-
-                NumberAnimation {
-                    id: collapseSidebarAnimation
-                    target: sidebar
-                    properties: "x"
-                    to: base.width
-                    duration: 100
-                }
-
-                NumberAnimation {
-                    id: expandSidebarAnimation
-                    target: sidebar
-                    properties: "x"
-                    to: base.width - sidebar.width
-                    duration: 100
-                }
-
-                Component.onCompleted:
-                {
-                    var sidebar_collapsed = UM.Preferences.getValue("cura/sidebar_collapsed");
-
-                    if (sidebar_collapsed)
-                    {
-                        sidebar.collapsed = true;
-                        viewportRect = Qt.rect(0, 0, 1, 1.0)
-                        collapseSidebarAnimation.start();
-                    }
-                }
-
-                MouseArea
-                {
-                    visible: UM.Controller.activeStage.sidebarComponent != ""
-                    anchors.fill: parent
-                    acceptedButtons: Qt.AllButtons
-                    onWheel: wheel.accepted = true
-                }
+                action: Cura.Actions.popOutSidebar
             }
 
             UM.MessageStack
@@ -510,20 +453,13 @@ UM.MainWindow
                 anchors
                 {
                     horizontalCenter: parent.horizontalCenter
-                    horizontalCenterOffset: -(Math.round(UM.Theme.getSize("sidebar").width / 2))
+                    // horizontalCenterOffset: -(Math.round(UM.Theme.getSize("sidebar").width / 2))
                     top: parent.verticalCenter;
                     bottom: parent.bottom;
                     bottomMargin:  UM.Theme.getSize("default_margin").height
                 }
             }
         }
-    }
-
-    // Expand or collapse sidebar
-    Connections
-    {
-        target: Cura.Actions.expandSidebar
-        onTriggered: sidebar.callExpandOrCollapse()
     }
 
     UM.PreferencesDialog
@@ -1057,6 +993,46 @@ UM.MainWindow
             else if(Cura.MachineManager.activeMachineId == null || Cura.MachineManager.activeMachineId == "")
             {
                 addMachineDialog.open();
+            }
+        }
+    }
+
+    // TEST STUFF
+    Connections
+    {
+        target: Cura.Actions.popOutSidebar
+        onTriggered:
+        {
+            detached_sidebar.visible = !detached_sidebar.visible;
+        }
+    }
+
+    UM.FloatingPanel
+    {
+        id: detached_sidebar
+
+        onVisibleChanged:
+        {
+            // When the dialog closes, switch to the General page.
+            // This prevents us from having a heavy page like Setting Visiblity active in the background.
+            setPage(0);
+        }
+
+        Loader
+        {
+            property bool collapsed: false;
+            property var initialWidth: UM.Theme.getSize("sidebar").width;
+
+            anchors.fill: parent
+
+            source: UM.Controller.activeStage.sidebarComponent
+
+            MouseArea
+            {
+                visible: UM.Controller.activeStage.sidebarComponent != ""
+                anchors.fill: parent
+                acceptedButtons: Qt.AllButtons
+                onWheel: wheel.accepted = true
             }
         }
     }

@@ -23,8 +23,6 @@ Item
     property alias viewLeftSideCamera: viewLeftSideCameraAction;
     property alias viewRightSideCamera: viewRightSideCameraAction;
 
-    property alias expandSidebar: expandSidebarAction;
-
     property alias deleteSelection: deleteSelectionAction;
     property alias centerSelection: centerSelectionAction;
     property alias multiplySelection: multiplySelectionAction;
@@ -69,6 +67,8 @@ Item
     property alias configureSettingVisibility: configureSettingVisibilityAction
 
     property alias browsePackages: browsePackagesAction
+
+    property alias popOutSidebar: popOutSidebarAction
 
     UM.I18nCatalog{id: catalog; name:"cura"}
 
@@ -436,8 +436,8 @@ Item
 
     Action
     {
-        id: expandSidebarAction;
-        text: catalog.i18nc("@action:inmenu menubar:view","Expand/Collapse Sidebar");
-        shortcut: "Ctrl+E";
+        id: popOutSidebarAction;
+        text: catalog.i18nc("@action:inmenu menubar:view","Pop Out Sidebar");
+        shortcut: "Ctrl+H";
     }
 }
