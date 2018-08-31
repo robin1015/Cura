@@ -9,13 +9,14 @@ import QtQuick.Layouts 1.1
 import UM 1.2 as UM
 import Cura 1.0 as Cura
 
-Item
+Rectangle
 {
     id: base;
 
-    width: buttons.width;
-    height: buttons.height
+    width: 200;
+    height: 400
     property int activeY
+    color: UM.Theme.getColor("sidebar_header_bar")
 
     Column
     {
@@ -23,6 +24,8 @@ Item
 
         anchors.bottom: parent.bottom
         anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.topMargin: 60
         spacing: UM.Theme.getSize("button_lining").width
 
         Repeater

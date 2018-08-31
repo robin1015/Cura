@@ -438,6 +438,6 @@ Item
     {
         id: popOutSidebarAction;
         text: catalog.i18nc("@action:inmenu menubar:view","Pop Out Sidebar");
-        shortcut: "Ctrl+H";
+        shortcut: "Ctrl+E";
     }
 }

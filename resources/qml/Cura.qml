@@ -380,17 +380,44 @@ UM.MainWindow
                 action: Cura.Actions.open;
             }
 
-            Toolbar
+            MainToolbar
             {
-                id: toolbar;
+                anchors
+                {
+                    top: topbar.bottom
+                    left: parent.left
+                    right: parent.right
+                    topMargin: UM.Theme.getSize("default_margin").height;
+                    leftMargin: 64
+                    rightMargin: UM.Theme.getSize("default_margin").width;
+                }
+            }
 
-                property int mouseX: base.mouseX
-                property int mouseY: base.mouseY
-
+            FoldOutPanel {
+                id: printer_selection
                 anchors {
                     top: openFileButton.bottom;
                     topMargin: UM.Theme.getSize("window_margin").height;
                     left: parent.left;
+                    leftMargin: UM.Theme.getSize("window_margin").width;
+                }
+                base_width: 56
+                base_height: 56
+                overlap_x: true
+                overlap_y: true
+                button_delegate: Item
+                {
+                    anchors.fill: parent
+                    Label {
+                        text: "Tools"
+                        color: "white"
+                    }
+                }
+                pane_delegate: Toolbar
+                {
+                    id: toolbar;
+                    property int mouseX: base.mouseX
+                    property int mouseY: base.mouseY
                 }
             }
 
@@ -1010,6 +1037,10 @@ UM.MainWindow
     UM.FloatingPanel
     {
         id: detached_sidebar
+        minimumWidth: UM.Theme.getSize("sidebar").width
+        width:        UM.Theme.getSize("sidebar").width
+        maximumWidth: UM.Theme.getSize("sidebar").width
+        
 
         onVisibleChanged:
         {

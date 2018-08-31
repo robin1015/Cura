@@ -74,66 +74,66 @@ Rectangle
         return finalTime;
     }
 
-    MouseArea
-    {
-        anchors.fill: parent
-        acceptedButtons: Qt.AllButtons
+    // MouseArea
+    // {
+    //     anchors.fill: parent
+    //     acceptedButtons: Qt.AllButtons
 
-        onWheel:
-        {
-            wheel.accepted = true;
-        }
-    }
+    //     onWheel:
+    //     {
+    //         wheel.accepted = true;
+    //     }
+    // }
 
-    MachineSelection
-    {
-        id: machineSelection
-        width: base.width - configSelection.width - separator.width
-        height: UM.Theme.getSize("sidebar_header").height
-        anchors.top: base.top
-        anchors.left: parent.left
-    }
+    // MachineSelection
+    // {
+    //     id: machineSelection
+    //     width: base.width - configSelection.width - separator.width
+    //     height: UM.Theme.getSize("sidebar_header").height
+    //     anchors.top: base.top
+    //     anchors.left: parent.left
+    // }
 
-    Rectangle
-    {
-        id: separator
-        visible: configSelection.visible
-        width: visible ? Math.round(UM.Theme.getSize("sidebar_lining_thin").height / 2) : 0
-        height: UM.Theme.getSize("sidebar_header").height
-        color: UM.Theme.getColor("sidebar_lining_thin")
-        anchors.left: machineSelection.right
-    }
+    // Rectangle
+    // {
+    //     id: separator
+    //     visible: configSelection.visible
+    //     width: visible ? Math.round(UM.Theme.getSize("sidebar_lining_thin").height / 2) : 0
+    //     height: UM.Theme.getSize("sidebar_header").height
+    //     color: UM.Theme.getColor("sidebar_lining_thin")
+    //     anchors.left: machineSelection.right
+    // }
 
-    ConfigurationSelection
-    {
-        id: configSelection
-        visible: isNetworkPrinter && printerConnected
-        width: visible ? Math.round(base.width * 0.15) : 0
-        height: UM.Theme.getSize("sidebar_header").height
-        anchors.top: base.top
-        anchors.right: parent.right
-        panelWidth: base.width
-    }
+    // ConfigurationSelection
+    // {
+    //     id: configSelection
+    //     visible: isNetworkPrinter && printerConnected
+    //     width: visible ? Math.round(base.width * 0.15) : 0
+    //     height: UM.Theme.getSize("sidebar_header").height
+    //     anchors.top: base.top
+    //     anchors.right: parent.right
+    //     panelWidth: base.width
+    // }
 
-    SidebarHeader {
-        id: header
-        width: parent.width
-        visible: !hideSettings && (machineExtruderCount.properties.value > 1 || Cura.MachineManager.hasMaterials || Cura.MachineManager.hasVariants)
-        anchors.top: machineSelection.bottom
+    // SidebarHeader {
+    //     id: header
+    //     width: parent.width
+    //     visible: !hideSettings && (machineExtruderCount.properties.value > 1 || Cura.MachineManager.hasMaterials || Cura.MachineManager.hasVariants)
+    //     anchors.top: machineSelection.bottom
 
-        onShowTooltip: base.showTooltip(item, location, text)
-        onHideTooltip: base.hideTooltip()
-    }
+    //     onShowTooltip: base.showTooltip(item, location, text)
+    //     onHideTooltip: base.hideTooltip()
+    // }
 
-    Rectangle {
-        id: headerSeparator
-        width: parent.width
-        visible: settingsModeSelection.visible && header.visible
-        height: visible ? UM.Theme.getSize("sidebar_lining").height : 0
-        color: UM.Theme.getColor("sidebar_lining")
-        anchors.top: header.bottom
-        anchors.topMargin: visible ? UM.Theme.getSize("sidebar_margin").height : 0
-    }
+    // Rectangle {
+    //     id: headerSeparator
+    //     width: parent.width
+    //     visible: settingsModeSelection.visible && header.visible
+    //     height: visible ? UM.Theme.getSize("sidebar_lining").height : 0
+    //     color: UM.Theme.getColor("sidebar_lining")
+    //     anchors.top: header.bottom
+    //     anchors.topMargin: visible ? UM.Theme.getSize("sidebar_margin").height : 0
+    // }
 
     onCurrentModeIndexChanged:
     {
@@ -151,7 +151,7 @@ Rectangle
         renderType: Text.NativeRendering
         anchors.left: parent.left
         anchors.leftMargin: UM.Theme.getSize("sidebar_margin").width
-        anchors.top: hideSettings ? machineSelection.bottom : headerSeparator.bottom
+        anchors.top: parent.top
         anchors.topMargin: UM.Theme.getSize("sidebar_margin").height
         width: Math.round(parent.width * 0.45)
         font: UM.Theme.getFont("large")
