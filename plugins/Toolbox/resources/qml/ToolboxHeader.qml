@@ -34,7 +34,6 @@ Item
             }
         }
 
-        /*  // NOTE: Remember to re-enable for v3.6!
         ToolboxTabButton
         {
             text: catalog.i18nc("@title:tab", "Materials")
@@ -47,7 +46,6 @@ Item
                 toolbox.viewPage = "overview"
             }
         }
-        */
     }
     ToolboxTabButton
     {
