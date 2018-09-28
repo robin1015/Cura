@@ -13,21 +13,21 @@ Thank you for using Cura!
 
 **Application Version**
 <!-- The version of the application this issue occurs with -->
-
+cura3.5 test
 **Platform**
 <!-- Information about the operating system the issue occurs on -->
-
+win7 64
 **Printer**
 <!-- Which printer was selected in Cura. Please attach project file as .curaproject.3mf.zip -->
-
+ultimaker original+，kossel mini
 **Steps to Reproduce**
 <!-- Add the steps needed that lead up to the issue -->
-
+Unable to set material diameter（Select the corresponding command, but do not jump out of the dialog box）
 **Actual Results**
 <!-- What happens after the above steps have been followed -->
-
+Unable to set material diameter（Select the corresponding command, but do not jump out of the dialog box）
 **Expected results**
 <!-- What should happen after the above steps have been followed -->
-
+Unable to set material diameter（Select the corresponding command, but do not jump out of the dialog box）
 **Additional Information**
 <!-- Extra information relevant to the issue, like screenshots -->
